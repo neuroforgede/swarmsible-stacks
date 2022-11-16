@@ -51,3 +51,4 @@ networks:
     name: docker_socket_proxy
     driver_opts:
       encrypted: ""
+      com.docker.network.driver.mtu: "1350"

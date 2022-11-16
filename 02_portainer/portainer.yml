@@ -53,6 +53,7 @@ networks:
     attachable: true
     driver_opts:
       encrypted: ""
+      com.docker.network.driver.mtu: "1350"
   traefik-public:
     external: true
 

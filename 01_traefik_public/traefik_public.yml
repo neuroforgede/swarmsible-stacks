@@ -82,6 +82,7 @@ networks:
     name: traefik-public
     driver_opts:
       encrypted: ""
+      com.docker.network.driver.mtu: "1350"
   docker_socket_proxy:
     name: "docker_socket_proxy"
     external: true

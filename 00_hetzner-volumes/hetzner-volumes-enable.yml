@@ -14,9 +14,6 @@ services:
       mode: global
       restart_policy:
         condition: "none"
-      placement:
-        constraints:
-          - node.labels.hetzner_volume == 1
 
       resources:
         limits:

@@ -51,3 +51,10 @@ scrape_configs:
       - 'tasks.docker-engine-events-exporter'
       type: 'A'
       port: 9000
+      
+  - job_name: 'docker-swarm-trivy-exporter'
+    dns_sd_configs:
+    - names:
+      - 'tasks.docker-swarm-trivy-exporter'
+      type: 'A'
+      port: 9000

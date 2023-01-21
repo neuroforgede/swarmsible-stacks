@@ -75,7 +75,7 @@ services:
           memory: 64M
           
   docker-swarm-trivy-exporter:
-    image: neuroforgede/docker-swarm-trivy-exporter:0.1
+    image: ghcr.io/neuroforgede/docker-swarm-trivy-exporter:latest
     networks:
       - net
     volumes:
@@ -95,7 +95,29 @@ services:
           memory: 128M
 
   docker-engine-events-exporter:
-    image: neuroforgede/docker-engine-events-exporter:0.1
+    image: ghcr.io/neuroforgede/docker-engine-events-exporter:latest
+    healthcheck:
+      test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:9000/metrics"]
+      interval: 10s
+      timeout: 10s
+      retries: 2
+      start_period: 10s
+    networks:
+      - net
+    environment:
+      - DOCKER_HOSTNAME={{.Node.Hostname}}
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    deploy:
+      mode: global
+      resources:
+        limits:
+          memory: 256M
+        reservations:
+          memory: 128M
+
+  docker-engine-networks-exporter:
+    image: ghcr.io/neuroforgede/docker-engine-networks-exporter:latest
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:9000/metrics"]
       interval: 10s

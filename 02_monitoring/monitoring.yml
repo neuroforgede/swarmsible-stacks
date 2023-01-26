@@ -4,7 +4,7 @@ services:
   prometheus:
     user: root
     entrypoint: "/etc/prometheus/docker-entrypoint.sh"
-    image:  prom/prometheus:v2.36.0
+    image:  prom/prometheus:v2.41.0
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:9090/metrics"]
       interval: 10s
@@ -50,7 +50,7 @@ services:
         - traefik.http.routers.monitoring-prometheus-http.middlewares=monitoring-prometheus-auth
 
   cadvisor:
-    image: gcr.io/cadvisor/cadvisor:v0.46.0
+    image: gcr.io/cadvisor/cadvisor:v0.47.0
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:8080/metrics"]
       interval: 10s
@@ -178,7 +178,7 @@ services:
 
   grafana:
     entrypoint: /custom_entrypoint.sh
-    image: grafana/grafana:9.1.6
+    image: grafana/grafana:9.3.6
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:3000/api/health"]
       interval: 10s
@@ -232,7 +232,7 @@ services:
         - traefik.http.services.monitoring-grafana.loadbalancer.server.port=3000
 
   alertmanager:
-    image: prom/alertmanager:v0.24.0
+    image: prom/alertmanager:v0.25.0
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:9093/metrics"]
       interval: 10s
@@ -271,7 +271,7 @@ services:
         - traefik.http.routers.monitoring-alertmanager-http.middlewares=monitoring-alertmanager-auth
 
   prom2teams:
-    image: idealista/prom2teams:3.3.0
+    image: idealista/prom2teams:4.2.1
     entrypoint: /bin/sh -c "python /opt/prom2teams/replace_config.py && exec prom2teams --loglevel INFO"
     healthcheck:
       test: ["CMD", "wget", "--tries=1", "--spider", "--quiet", "http://localhost:8089/metrics"]

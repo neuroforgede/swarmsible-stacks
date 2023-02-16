@@ -1,5 +1,7 @@
 # 02_monitoring
 
+NOTE: a more templatable version of this can be found over at https://github.com/neuroforgede/promswarm
+
 ## How-To:
 
 0. If you are on Hetzner: Install the hetzner cloud volume plugin that is also included in this repo). If not, replace the volumes according to your requirements.
